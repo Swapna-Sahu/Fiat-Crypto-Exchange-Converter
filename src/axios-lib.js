@@ -21,7 +21,6 @@ axiosAPI = function () {
             axios.get("https://api.exchangeratesapi.io/"+newDate)
                 .then(function (response) {
                     EventBus.$emit(ResponseEventType.HISTORY_BASE_EUR, response);
-                    console.log(response);
                 }).catch(function (error) {
                     showErrorRes(error.response);
                 });
@@ -30,7 +29,6 @@ axiosAPI = function () {
            axios.get("https://api.exchangeratesapi.io/latest?base="+ base)
                 .then(function (response) {
                     EventBus.$emit(ResponseEventType.LATEST_SELECTED_BASE, response);
-                    console.log('response', response);
                 }).catch(function (error) {
                     showErrorRes(error.response);
                 });
@@ -49,7 +47,6 @@ axiosAPI = function () {
             axios.get("https://api.exchangeratesapi.io/history?start_at="+startDate+'&end_at='+endDate)
                 .then(function (response) {
                     EventBus.$emit(ResponseEventType.HISTORY_TIME_PERIOD, response);
-                    console.log(response);
                 }).catch(function (error) {
                     showErrorRes(error.response);
                 });

@@ -7,40 +7,49 @@
     </button>
     <h1>Crypto - Fiat Currency</h1>
     <div class="grid-container">
-    <div class="grid-item item-1">
-      <label>Amount = </label>
-      <input type="number" v-model="amount" placeholder="Amount" class="input-width" required />
-    </div>
-    <div class="grid-item item-2">  
-      <label>From Crypto: </label>
-      <select v-model="cryptoUnitFrom" class="input-width">
-            <option v-for="crypto in cryptoArray">{{crypto}}</option>
-      </select>
-      <label>To Fiat: </label>
-      <select v-model="fiatUnitTo" class="input-width">
-            <option v-for="fiat in fiatArray">{{fiat}}</option>
-      </select>
-    </div>
-    <div class="grid-item item-3 info">
-      <p>Could not find your pair symbol in dropdown? Type your pair symbol below ...</p>
-    </div>
-    <div class="grid-item item-4">
-      <label>From Crypto  : </label>
-      <input type="string" v-model="cryptoUnitFrom"  class="input-width"  />
-      <label>To Fiat  : </label>
-      <input type="string" v-model="fiatUnitTo"  class="input-width"  />
-    </div>
-    <div class="grid-item item-5">
-      <button v-on:click="onSubmit" class="submit-btn">Show</button>
-    </div>
-    <div class="converted">
-      <div class="exchange-rate">
-      <p >Symbol : {{ selectedSymbol }}</p>
-      <p  v-show="exchangeRate>0">Rate : {{ exchangeRate }}</p>
-      <p  v-show="exchangeRate===null">Rate : Not listed</p>
+      <div class="grid-item item-1">
+        <label>Amount = </label>
+        <input
+          type="number"
+          v-model="amount"
+          placeholder="Amount"
+          class="input-width"
+          required
+        />
       </div>
-      <p class="calculated-amount">Output : {{ convertedAmount }}</p>
-    </div>
+      <div class="grid-item item-2">
+        <label>From Crypto: </label>
+        <select v-model="cryptoUnitFrom" class="input-width">
+          <option v-for="crypto in cryptoArray">{{ crypto }}</option>
+        </select>
+        <label>To Fiat: </label>
+        <select v-model="fiatUnitTo" class="input-width">
+          <option v-for="fiat in fiatArray">{{ fiat }}</option>
+        </select>
+      </div>
+      <div class="grid-item item-3 info">
+        <p>
+          Could not find your pair symbol in dropdown? Type your pair symbol
+          below ...
+        </p>
+      </div>
+      <div class="grid-item item-4">
+        <label>From Crypto : </label>
+        <input type="string" v-model="cryptoUnitFrom" class="input-width" />
+        <label>To Fiat : </label>
+        <input type="string" v-model="fiatUnitTo" class="input-width" />
+      </div>
+      <div class="grid-item item-5">
+        <button v-on:click="onSubmit" class="submit-btn">Show</button>
+      </div>
+      <div class="converted">
+        <div class="exchange-rate">
+          <p>Symbol : {{ selectedSymbol }}</p>
+          <p v-show="exchangeRate > 0">Rate : {{ exchangeRate }}</p>
+          <p v-show="exchangeRate === null">Rate : Not listed</p>
+        </div>
+        <p class="calculated-amount">Output : {{ convertedAmount }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -53,7 +62,7 @@ import { axiosAPI } from "../axios-lib";
 export default {
   data() {
     return {
-      amount:null,
+      amount: null,
       cryptoUnitFrom: "",
       fiatUnitTo: "",
       cryptoArray: [],
@@ -80,7 +89,7 @@ export default {
     EventBus.$off(ResponseEventType.FIAT_TO_CRYPTO);
   },
   methods: {
-    setFiatArr: function() {
+    setFiatArr: function () {
       this.fiatArray = utils.methods.getFiatForCryptoCurrencies();
     },
     setCryptoArr: function () {
@@ -96,42 +105,26 @@ export default {
       let filtered = [];
       let arr = this.fetchedData;
       filtered = arr.filter((item) => item.symbol === this.selectedSymbol);
-      console.log('filtered',filtered);
-      if(filtered.length){
-      this.exchangeRate = filtered[0].price;
+      if (filtered.length) {
+        this.exchangeRate = filtered[0].price;
       }
-      console.log('this.exchangeRate',this.exchangeRate);
       this.convertedAmountCalc();
     },
-    convertedAmountCalc: function() {
+    convertedAmountCalc: function () {
       this.convertedAmount = this.exchangeRate * this.amount;
-    }
+    },
   },
 };
 </script>
 
 <style>
-.converted {
-  font-size: 25px;
-  text-align: center;
-  margin: 20px;
-  padding: 20px;
-  border: 2px solid;
-}
-#fiatStyle {
-  color: white;
-  padding: 40px 20px;
-}
-.btn-home {
-  float: right;
-  background-color: #82b440;
-  border-radius: 35px;
-}
+@import "../css/general.css";
+@import "../css/crypto.css";
+
 h1 {
   text-align: left !important;
   margin-bottom: 20px;
 }
-
 .grid-container {
   display: grid;
 }
@@ -150,37 +143,5 @@ h1 {
   margin: 20px 0px;
   font-size: 20px !important;
   color: aquamarine;
-}
-.input-width {
-  margin-left: 10px;
-  width: 120px;
-  height: 25px;
-  background-color: white;
-  padding-left: 10px;
-}
-.btn-style {
-  font-size: 20px;
-  text-decoration: none;
-  padding: 15px;
-  color: white;
-}
-.submit-btn {
-  height: 2.5rem;
-  font-size: 17px;
-  background-color: #82b440;
-  font-weight: bold;
-  color: white;
-  border-radius: 20px;
-  padding: 0px 20px;
-  text-align: center;
-}
-.exchange-rate {
-  background-color: teal;
-  padding: 20px;
-}
-.calculated-amount {
-  font-size: 35px;
-  color: yellow;
-  margin-top: 20px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="fiatStyle">
-    <button  class="btn-home">
+    <button class="btn-home">
       <router-link to="/">
         <span class="btn-style">Home Page</span>
       </router-link>
@@ -20,13 +20,22 @@
         <button v-on:click="component = 'history-base-eur'" class="btn-options">
           History in base EUR
         </button>
-        <button v-on:click="component = 'latest-selected-base'" class="btn-options">
+        <button
+          v-on:click="component = 'latest-selected-base'"
+          class="btn-options"
+        >
           Latest in selected base
         </button>
-        <button v-on:click="component = 'two-symbol-base-eur'" class="btn-options">
-           Two symbol base EUR
+        <button
+          v-on:click="component = 'two-symbol-base-eur'"
+          class="btn-options"
+        >
+          Two symbol base EUR
         </button>
-        <button v-on:click="component = 'history-time-period'" class="btn-options">
+        <button
+          v-on:click="component = 'history-time-period'"
+          class="btn-options"
+        >
           History time period
         </button>
       </div>
@@ -54,49 +63,14 @@ export default {
   data() {
     return {
       component: "exchange-rate",
+      homepage:false,
     };
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 
 <style scoped>
-#fiatStyle{
-color:white;
-padding:40px 20px ;
-}
-h1{
-  margin-bottom: 40px;
-}
-.btn-home{
-  float: right;
-    background-color: #82b440;
-    border-radius: 35px;
-}
-#output {
-  display: inline-grid;
-  width: 60%;
-  padding-left: 10px;
-}
-#options {
-  display: inline-grid;
-  row-gap: 10px;
-  margin-left: 20px;
-  width: 30%;
-}
-.btn-style{
-  font-size: 20px;
-  text-decoration: none;
-  padding:15px;
-  color:white;
-}
-.btn-options{
-  background-color: lightgray;
-  color:darkblue;
-  font-size: 20px;
-  font-weight: bold;
-  height:30px;
-  padding:0px 5px;
-}
+@import "../css/fiatToFiat.css";
+@import "../css/general.css";
 </style>
