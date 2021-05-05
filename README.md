@@ -3,7 +3,6 @@
 ## 1.	INTRODUCTION
 
       Exchange Rate Converter for Fiat and Crypto currencies.
-      The purpose – Frontend test assignment for Opeepl Company.
 
 ## 2.	TECHONOLOGY USED 
       
